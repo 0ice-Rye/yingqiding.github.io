@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Ding Yingqi - Data Science Master student with Robotics Engineering background, seeking Data Analytics/AI internship.">
+    <meta name="keywords" content="Data Science, AI, Machine Learning, Python, SQL, Robotics, Ding Yingqi">
+    <title>Ding Yingqi | Data & AI Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-body: #f4f7fc;
+            --bg-surface: #ffffff;
+            --text-primary: #1a2a3a;
+            --text-secondary: #2c3e50;
+            --accent: #2c7da0;
+            --accent-light: #d9eef5;
+            --border: #e0edf2;
+            --tag-bg: #d9eef5;
+            --tag-text: #1f5068;
+            --highlight: #e67e22;
+            --nav-bg: rgba(255,255,255,0.96);
+            --shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        body.dark {
+            --bg-body: #121826;
+            --bg-surface: #1e293b;
+            --text-primary: #e2e8f0;
+            --text-secondary: #cbd5e1;
+            --accent: #5fa7c2;
+            --accent-light: #2d3e4b;
+            --border: #334155;
+            --tag-bg: #2d3e4b;
+            --tag-text: #b9e0f0;
+            --nav-bg: #1e293be6;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-primary);
+            line-height: 1.5;
+            scroll-behavior: smooth;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        /* 右侧固定导航栏布局 */
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .nav-sidebar {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 220px;
+            height: 100vh;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            border-left: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 2rem 1rem;
+            z-index: 100;
+            transition: transform 0.3s;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: color 0.2s;
+            font-size: 0.95rem;
+            display: block;
+            padding: 0.2rem 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .lang-switch {
+            display: flex;
+            gap: 0.3rem;
+            background: var(--bg-surface);
+            border-radius: 40px;
+            padding: 0.2rem;
+            box-shadow: var(--shadow);
+            justify-content: center;
+        }
+
+        .lang-btn, .theme-toggle {
+            border: none;
+            background: transparent;
+            padding: 0.3rem 0.8rem;
+            border-radius: 32px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+        }
+
+        .lang-btn.active {
+            background: var(--accent);
+            color: white;
+        }
+
+        .theme-toggle {
+            background: var(--bg-surface);
+            box-shadow: var(--shadow);
+            width: 100%;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-right: 220px;
+            padding: 2rem 2rem 3rem;
+            max-width: calc(100% - 220px);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: 3.5rem;
+            scroll-margin-top: 2rem;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .headline {
+            font-size: 1.2rem;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 0.8rem 0;
+        }
+
+        .tag {
+            background: var(--tag-bg);
+            color: var(--tag-text);
+            padding: 0.3rem 0.9rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            border-left: 5px solid var(--accent);
+            padding-left: 1rem;
+        }
+
+        .about-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        .about-text { flex: 2; }
+        .about-highlights {
+            flex: 1;
+            background: var(--bg-surface);
+            padding: 1rem 1.2rem;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+        }
+        .edu {
+            background: var(--bg-surface);
+            padding: 0.8rem 1rem;
+            border-radius: 16px;
+            margin: 1rem 0;
+            border-left: 3px solid var(--accent);
+        }
+        .strengths {
+            list-style: none;
+            margin-top: 0.8rem;
+        }
+        .strengths li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+        .strengths li::before {
+            content: "▹";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            background: var(--bg-surface);
+            border-radius: 24px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+        }
+        .skill-cat {
+            flex: 1;
+            min-width: 180px;
+        }
+        .skill-cat h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.7rem;
+            color: var(--accent);
+        }
+        .skill-cat ul {
+            list-style: none;
+        }
+        .skill-cat li {
+            margin-bottom: 0.4rem;
+            font-size: 0.9rem;
+        }
+        .project-card, .intern-card {
+            background: var(--bg-surface);
+            border-radius: 20px;
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 1.8rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+        .project-tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin: 0.5rem 0 0.8rem;
+        }
+        .tech-tag {
+            background: var(--accent-light);
+            color: var(--accent);
+            font-size: 0.7rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+        .project-title, .intern-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+        .project-date, .intern-date {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            display: inline-block;
+        }
+        .detail-item {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .detail-label {
+            font-weight: 700;
+            min-width: 105px;
+            color: var(--accent);
+        }
+        .detail-value {
+            flex: 1;
+        }
+        .highlight {
+            background: linear-gradient(120deg, var(--highlight) 0%, var(--highlight) 40%);
+            color: white;
+            font-weight: 700;
+            padding: 0.1rem 0.3rem;
+            border-radius: 8px;
+            display: inline-block;
+            font-size: 0.9em;
+        }
+        .project-links {
+            margin-top: 0.8rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .project-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            background: var(--bg-body);
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+        }
+        .project-link:hover {
+            background: var(--accent);
+            color: white;
+        }
+        .btn-resume {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.6rem 1.4rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        .btn-resume:hover {
+            background-color: #1f5e7a;
+        }
+        .resume-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+        .contact-info {
+            background: var(--bg-surface);
+            padding: 1rem 1.5rem;
+            border-radius: 24px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            border: 1px solid var(--border);
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .copy-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            padding: 0.2rem 0.4rem;
+            border-radius: 20px;
+            transition: 0.1s;
+            color: var(--accent);
+        }
+        .copy-btn:hover {
+            background: var(--accent-light);
+        }
+        .toast-msg {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            z-index: 200;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        /* 回到顶部按钮 */
+        .go-top {
+            position: fixed;
+            bottom: 30px;
+            right: 250px;
+            background: var(--accent);
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 99;
+            border: none;
+            font-size: 1.5rem;
+        }
+        .go-top.show {
+            opacity: 0.8;
+            visibility: visible;
+        }
+        .go-top:hover {
+            opacity: 1;
+            transform: translateY(-3px);
+        }
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            .layout {
+                flex-direction: column;
+            }
+            .nav-sidebar {
+                position: fixed;
+                bottom: 0;
+                top: auto;
+                right: 0;
+                left: 0;
+                width: 100%;
+                height: auto;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0.5rem 1rem;
+                border-left: none;
+                border-top: 1px solid var(--border);
+                backdrop-filter: blur(10px);
+                z-index: 100;
+            }
+            .nav-links {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 0.8rem;
+                justify-content: center;
+            }
+            .nav-controls {
+                flex-direction: row;
+                margin-top: 0;
+                gap: 0.5rem;
+            }
+            .main-content {
+                margin-right: 0;
+                max-width: 100%;
+                padding: 1rem;
+                margin-bottom: 70px;
+            }
+            .container {
+                padding: 0;
+            }
+            .go-top {
+                right: 20px;
+                bottom: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="layout">
+    <nav class="nav-sidebar">
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#internship">Internship</a></li>
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-controls">
+            <div class="lang-switch">
+                <button class="lang-btn" data-lang="zh">中文</button>
+                <button class="lang-btn active" data-lang="en">EN</button>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Dark mode">🌙</button>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="container">
+            <!-- Home -->
+            <section class="section" id="home">
+                <h1 id="home-name">Ding Yingqi</h1>
+                <div class="headline" id="headline-text">Seeking Data Analytics / AI-related Internship – 2026 Graduate</div>
+                <div class="tags" id="tags-area"></div>
+            </section>
+
+            <!-- About -->
+            <section class="section" id="about">
+                <h2 id="about-title">About Me</h2>
+                <div class="about-grid">
+                    <div class="about-text">
+                        <p id="about-p1"></p>
+                        <p id="about-preference" style="margin-top: 0.8rem; font-style: italic; color: var(--accent);"></p>
+                        <div class="edu" id="edu-block"></div>
+                        <strong id="strength-title">💡 Core Strengths</strong>
+                        <ul class="strengths" id="strengths-list"></ul>
+                    </div>
+                    <div class="about-highlights" id="about-highlights"></div>
+                </div>
+            </section>
+
+            <!-- Skills -->
+            <section class="section" id="skills">
+                <h2 id="skills-title">Skills</h2>
+                <div class="skills-grid" id="skills-content"></div>
+            </section>
+
+            <!-- Projects -->
+            <section class="section" id="projects">
+                <h2 id="projects-title">Projects</h2>
+                <div id="projects-container"></div>
+            </section>
+
+            <!-- Internship -->
+            <section class="section" id="internship">
+                <h2 id="internship-title">Internship Experience</h2>
+                <div id="internship-container"></div>
+            </section>
+
+            <!-- Resume -->
+            <section class="section" id="resume">
+                <h2 id="resume-title">Resume</h2>
+                <p id="resume-desc"></p>
+                <div class="resume-buttons">
+                    <a href="#" id="resume-cn-link" class="btn-resume" target="_blank">📄 下载中文简历 (PDF)</a>
+                    <a href="#" id="resume-en-link" class="btn-resume" target="_blank">📄 Download English Resume (PDF)</a>
+                </div>
+                <p style="margin-top: 0.8rem; font-size: 0.8rem;" id="resume-note"></p>
+            </section>
+
+            <!-- Contact -->
+            <section class="section" id="contact">
+                <h2 id="contact-title">Contact</h2>
+                <div class="contact-info" id="contact-info"></div>
+            </section>
+            <footer><p id="footer-text"></p></footer>
+        </div>
+    </div>
+</div>
+
+<!-- 回到顶部按钮 -->
+<div class="go-top" id="goTopBtn" aria-label="Back to top">↑</div>
+<div id="toastMsg" class="toast-msg">📋 Copied!</div>
+
+<script>
+    // -------------------- 中英文数据（含业务价值定性描述、新增深度学习框架）--------------------
+    const content = {
+        en: {
+            homeName: "Ding Yingqi",
+            headline: "Seeking Data Analytics / AI-related Internship – 2026 Graduate",
+            tags: ["Data Analytics", "Artificial Intelligence", "Machine Learning", "Python", "SQL", "Data Mining", "Robotics"],
+            aboutP1: "I am a Master of Data Science student at Lingnan University (expected 2026) with a Bachelor's in Robotics Engineering from Guangdong Polytechnic Normal University. This unique combination gives me a systems-thinking mindset from engineering and rigorous data analysis skills from data science. I excel at bridging the gap between physical systems and data-driven insights — whether building predictive models for business decisions, designing reinforcement learning agents, or optimizing database performance. My engineering background taught me how to debug complex systems, think in control loops, and deliver robust solutions under constraints. Now I apply that same discipline to data: from cleaning datasets to deploying machine learning models that create measurable impact.",
+            aboutPreference: "🎯 I am passionate about AI-related roles — whether in testing, development, or cross-domain data analytics — and eager to apply my robotics engineering and data science background to diverse business scenarios.",
+            edu: "🎓 Education\nLingnan University | M.Sc. in Data Science | 09/2025 – 08/2026 | GPA: 3.8/4.0\nGuangdong Polytechnic Normal University | B.E. in Robotics Engineering | 09/2020 – 06/2024 | Avg: 88.82/100 (Rank 8/195)",
+            strengths: [
+                "Systems thinking + cross-disciplinary problem solving",
+                "End-to-end ML pipeline & predictive modeling",
+                "SQL & NoSQL database design",
+                "Reinforcement learning & game AI",
+                "Data visualization & insight communication"
+            ],
+            highlightsHtml: `
+                <strong>🏅 Awards & Honors</strong>
+                <ul style='margin-top:0.5rem; list-style:none;'>
+                    <li>✨ National Scholarship (Top 1%)</li>
+                    <li>✨ Outstanding Graduate 2024</li>
+                    <li>✨ Top Ten Student Cadre</li>
+                    <li>✨ Challenge Cup 3rd Prize (Provincial)</li>
+                    <li>✨ Energy Saving Contest 1st Prize</li>
+                    <li>✨ Excellent Merit Scholarship (Top 3%)</li>
+                </ul>
+                <strong style="display:block; margin-top:1rem;">📜 Certificates</strong>
+                <ul style='margin-top:0.5rem; list-style:none;'>
+                    <li>📌 National Computer Level II & III</li>
+                    <li>📌 Senior Electrician Certificate</li>
+                    <li>📌 CNC Milling Senior Certificate</li>
+                    <li>📌 Teacher Qualification Certificate</li>
+                </ul>
+                <strong style="display:block; margin-top:1rem;">🌐 Languages</strong>
+                <ul style='margin-top:0.5rem; list-style:none;'>
+                    <li>🗣️ Cantonese, Mandarin, English</li>
+                </ul>
+            `,
+            skills: {
+                programming: ["Python (Pandas, NumPy, Scikit-learn)", "SQL", "R / RStudio", "C++"],
+                dataMl: ["Weka", "RStudio", "MATLAB", "Scikit-learn", "TensorFlow / Keras"],
+                engineering: ["SOLIDWORKS", "AutoCAD", "Halcon", "Altium Designer", "Keil uVision5", "Proteus"],
+                devops: ["MongoDB Compass", "Django", "Visual Studio", "Git / GitHub"]
+            },
+            projects: [
+                { title: "Machine Learning-Based Home Purchase Behavior Prediction", date: "01/2026 – 04/2026",
+                  techTags: ["Python", "Scikit-learn", "XGBoost", "Pandas", "Matplotlib"],
+                  problem: "Predict potential homebuyers for a real estate platform to improve marketing ROI, addressing data imbalance and multicollinearity.",
+                  data: "200,000 global property transaction records with 25 features (income, crime rate, property age, etc.).",
+                  approach: "Data preprocessing (IQR capping, log transform, feature engineering: EMI/income ratio, price per sqft). Built 9 models: MLP, Random Forest, LightGBM, XGBoost, etc. Grid search + 10-fold CV.",
+                  outcome: "MLP achieved <span class='highlight'>AUC 0.95</span>, <span class='highlight'>Recall 99.4%</span>, <span class='highlight'>F1 0.854</span>. EMI/income ratio (67%) and crime rate were top factors. <strong>Business value:</strong> Enables precise targeting of high-intent buyers, reducing wasted ad spend and improving marketing efficiency. Provides data foundation for personalized loan product recommendations.",
+                  contribution: "Led the project, designed the pipeline, performed all modeling and analysis, open-sourced code on GitHub.",
+                  githubLink: "https://github.com/0ice-Rye/Machine-Learning-for-Home-Purchase-Behavior-Prediction",
+                  youtubeLink: "https://youtu.be/6GIsQ4pbLuY"
+                },
+                { title: "Intelligent Snake Game with Q-Learning", date: "01/2026 – 03/2026",
+                  techTags: ["Python", "Pygame", "NumPy", "Reinforcement Learning", "Q-Learning"],
+                  problem: "Develop an AI agent that can avoid obstacles, collect food, and avoid poison in a dynamic snake game.",
+                  data: "14-dimensional state space (distance to food/poison/walls, etc.), 4 actions. 110k+ discrete states.",
+                  approach: "Q-Learning with custom reward function (distance, penalties for poison/time). Curriculum learning (no poison → delayed poison → immediate poison).",
+                  outcome: "AI achieved average score <span class='highlight'>140</span> in instant-poison mode and <span class='highlight'>250</span> in no-poison mode. <strong>Business value:</strong> Demonstrates practical curriculum learning for real-time decision-making under uncertainty. The methodology is transferable to dynamic resource allocation and autonomous navigation tasks.",
+                  contribution: "Sole developer, designed state space, reward function, training curriculum, and interactive UI.",
+                  githubLink: "https://github.com/0ice-Rye/Gluttonous_Snake_Base_on_QLearning",
+                  youtubeLink: "https://youtu.be/HeCXXTAlc4g"
+                },
+                { title: "E-commerce Database Design (MySQL & NoSQL)", date: "09/2025 – 11/2025",
+                  techTags: ["MySQL", "MongoDB", "Django", "Locust", "Performance Testing"],
+                  problem: "Compare relational vs. non-relational databases for high-concurrency e-commerce scenarios.",
+                  data: "Simulated e-commerce datasets; designed ER diagrams for MySQL and document schema for MongoDB.",
+                  approach: "Built dual databases with Django and MongoDB Compass. Wrote 9 Locust stress test scripts.",
+                  outcome: "MongoDB superior in average latency (<span class='highlight'>5.79ms</span> vs <span class='highlight'>17.40ms</span>) and long-tail latency. <strong>Business value:</strong> Provides clear database selection guidance for high-traffic e-commerce platforms, helping balance performance, scalability, and development cost.",
+                  contribution: "Project leader, designed architecture, conducted performance tests, visualized results, wrote report.",
+                  githubLink: "", youtubeLink: ""
+                },
+                { title: "Data Center Energy Consumption Analysis via Multi-Model Mining", date: "09/2025 – 11/2025",
+                  techTags: ["Weka", "Python", "Random Forest", "K-Means", "Apriori"],
+                  problem: "Optimize data center energy efficiency by predicting energy use, classifying efficiency levels, identifying load types.",
+                  data: "400,000+ server operation records with multiple hardware and workload features.",
+                  approach: "Used Weka & Colab for preprocessing. Applied Random Forest, MLP, Naive Bayes, K-Means, Apriori, CatBoost.",
+                  outcome: "Random Forest achieved near-perfect energy prediction (<span class='highlight'>Corr=0.9995</span>, <span class='highlight'>MAE=0.0001</span>). Naive Bayes efficiency accuracy <span class='highlight'>91.9%</span>. <strong>Business value:</strong> Enables proactive energy-saving strategies in data centers, potentially reducing operational costs and carbon footprint. Association rules reveal actionable hardware-workload configurations.",
+                  contribution: "Led the project, data cleaning, multi-model implementation, performance evaluation.",
+                  githubLink: "", youtubeLink: ""
+                }
+            ],
+            internships: [
+                { title: "IT Operations & Maintenance Assistant Engineer", company: "METSEN Supply Chain Co.", date: "03/2024 – 06/2024",
+                  description: "Assisted in system fault troubleshooting via remote login and on-site debugging; completed log analysis and performance optimization. Used Ansible for automated account management. Configured and maintained network devices, monitored traffic to resolve bottlenecks.",
+                  contribution: "Implemented automation scripts and ensured network stability." },
+                { title: "Teacher (Intern)", company: "City College of Huizhou", date: "09/2023 – 10/2023",
+                  description: "Taught 5 courses including AutoCAD, Python, Industrial Robotics, Electrical Control & PLC. Used video and physical demos to explain RAPID programming.",
+                  contribution: "Developed course materials and guided hands-on sessions." }
+            ],
+            resumeDesc: "Download my resume (Chinese or English version)",
+            resumeNote: " ",
+            contact: { email: "dingyingqi0111@gmail.com", phone: "+86 13590399058 / +852 67003560" },
+            footer: "© 2026 Ding Yingqi | Data & AI Portfolio"
+        },
+        zh: {
+            homeName: "丁颖淇",
+            headline: "求职数据分析 / AI相关实习岗 – 2026届毕业生",
+            tags: ["数据分析", "人工智能", "机器学习", "Python", "SQL", "数据挖掘", "机器人"],
+            aboutP1: "我是岭南大学数据科学硕士（2026届），本科毕业于广东技术师范大学机器人工程专业。这种'硬工+数据'的跨学科背景让我拥有独特的优势：从工程训练中获得系统思维、故障排查、闭环控制的底层能力；从数据科学中掌握建模分析、数据挖掘、业务洞察的核心技能。我擅长连接物理世界与数据世界——无论是为商业决策构建预测模型，为动态环境设计强化学习智能体，还是优化数据库性能。工程背景教会我如何在约束条件下调试复杂系统、交付可靠方案；现在我将同样的严谨应用于数据：从清洗数据到部署可产生实际影响的机器学习模型。",
+            aboutPreference: "🎯 我对AI方向的测试与研发、以及跨领域的数据分析工作充满热情，希望将我的数据科学与机器人工程背景应用于多元化的业务场景。",
+            edu: "🎓 教育背景\n岭南大学 | 数据科学硕士 | 09/2025 – 08/2026 | 绩点：3.8/4.0\n广东技术师范大学 | 机器人工程学士 | 09/2020 – 06/2024 | 均分：88.82/100 (专业排名8/195)",
+            strengths: [
+                "系统思维 + 跨学科问题解决能力",
+                "端到端机器学习流程与预测建模",
+                "SQL与NoSQL数据库设计",
+                "强化学习与游戏AI开发",
+                "数据可视化与洞察沟通"
+            ],
+            highlightsHtml: `
+                <strong>🏅 获奖与荣誉</strong>
+                <ul style='margin-top:0.5rem; list-style:none;'>
+                    <li>✨ 国家奖学金（专业前1%）</li>
+                    <li>✨ 2024届优秀毕业生</li>
+                    <li>✨ 校级十佳优秀学生干部</li>
+                    <li>✨ 挑战杯省级三等奖</li>
+                    <li>✨ 节能减排竞赛一等奖</li>
+                    <li>✨ 优秀特等奖学金（专业前3%）</li>
+                </ul>
+                <strong style="display:block; margin-top:1rem;">📜 证书</strong>
+                <ul style='margin-top:0.5rem; list-style:none;'>
+                    <li>📌 全国计算机二级、三级证书</li>
+                    <li>📌 高级电工证书</li>
+                    <li>📌 数控铣工高级证书</li>
+                    <li>📌 教师资格证书</li>
+                </ul>
+                <strong style="display:block; margin-top:1rem;">🌐 语言能力</strong>
+                <ul style='margin-top:0.5rem; list-style:none;'>
+                    <li>🗣️ 粤语、普通话、英语</li>
+                </ul>
+            `,
+            skills: {
+                programming: ["Python (Pandas, NumPy, Scikit-learn)", "SQL", "R / RStudio", "C++"],
+                dataMl: ["Weka", "RStudio", "MATLAB", "Scikit-learn", "TensorFlow / Keras"],
+                engineering: ["SOLIDWORKS", "AutoCAD", "Halcon", "Altium Designer", "Keil uVision5", "Proteus"],
+                devops: ["MongoDB Compass", "Django", "Visual Studio", "Git / GitHub"]
+            },
+            projects: [
+                { title: "基于机器学习的购房行为预测", date: "01/2026 – 04/2026",
+                  techTags: ["Python", "Scikit-learn", "XGBoost", "Pandas", "Matplotlib"],
+                  problem: "为房产平台预测潜在购房者，提升营销ROI，解决数据不平衡与多重共线性问题。",
+                  data: "20万条全球房产交易记录，25维特征（收入、犯罪率、房龄等）。",
+                  approach: "数据预处理（IQR盖帽法、对数变换、特征工程：还贷收入比、单位面积房价）。构建9种模型（MLP、随机森林、LightGBM、XGBoost等），网格搜索+10折交叉验证。",
+                  outcome: "MLP模型取得<span class='highlight'>AUC=0.95</span>，<span class='highlight'>召回率99.4%</span>，<span class='highlight'>F1=0.854</span>。还贷收入比(67%)和犯罪率为核心因素。<strong>业务价值：</strong>帮助平台精准定位高意向购房者，减少广告浪费，提升营销效率；为个性化贷款产品推荐提供数据基础。",
+                  contribution: "项目负责人，设计全流程，完成所有建模与分析，开源代码至GitHub。",
+                  githubLink: "https://github.com/0ice-Rye/Machine-Learning-for-Home-Purchase-Behavior-Prediction",
+                  youtubeLink: "https://youtu.be/6GIsQ4pbLuY"
+                },
+                { title: "基于Q-Learning的智能贪吃蛇游戏", date: "01/2026 – 03/2026",
+                  techTags: ["Python", "Pygame", "NumPy", "强化学习", "Q-Learning"],
+                  problem: "开发AI代理，在动态贪吃蛇游戏中自主避障、避毒、寻食。",
+                  data: "14维状态空间（到食物/毒/墙的距离等），4个动作，11万+离散状态。",
+                  approach: "Q-Learning + 自定义奖励函数（距离引导、行为奖惩、时间惩罚）。课程式训练（无毒→延迟投毒→即时投毒）。",
+                  outcome: "AI在即时投毒模式下平均得分<span class='highlight'>140</span>，无毒模式<span class='highlight'>250</span>。<strong>业务价值：</strong>验证了课程学习在不确定性环境下实时决策的有效性，方法可迁移至动态资源分配、自动驾驶避障等场景。",
+                  contribution: "独立开发，设计状态空间、奖励函数、训练课程及交互界面。",
+                  githubLink: "https://github.com/0ice-Rye/Gluttonous_Snake_Base_on_QLearning",
+                  youtubeLink: "https://youtu.be/HeCXXTAlc4g"
+                },
+                { title: "电商数据库设计（MySQL与NoSQL）", date: "09/2025 – 11/2025",
+                  techTags: ["MySQL", "MongoDB", "Django", "性能测试"],
+                  problem: "对比关系型与非关系型数据库在高并发电商场景下的性能，提供选型建议。",
+                  data: "模拟电商数据集；设计MySQL的ER图与MongoDB文档模型。",
+                  approach: "基于Django和MongoDB Compass搭建双数据库。编写9个Locust压力测试脚本。分析延迟、吞吐量、一致性。",
+                  outcome: "MongoDB在平均延迟（<span class='highlight'>5.79ms</span> vs <span class='highlight'>17.40ms</span>）和长尾延迟上更优。<strong>业务价值：</strong>为高流量电商平台提供清晰的数据库选型指南，帮助平衡性能、可扩展性与开发成本。",
+                  contribution: "项目负责人，设计架构，执行性能测试，可视化结果，撰写报告。",
+                  githubLink: "", youtubeLink: ""
+                },
+                { title: "基于多模型数据挖掘的数据中心能耗分析", date: "09/2025 – 11/2025",
+                  techTags: ["Weka", "Python", "随机森林", "K-Means", "Apriori"],
+                  problem: "优化数据中心能效：预测能耗、分级能效、识别负载类型、挖掘参数关联。",
+                  data: "40万+条服务器运行记录，包含硬件与负载特征。",
+                  approach: "使用Weka和Colab进行预处理。应用随机森林、MLP、朴素贝叶斯、K-Means、Apriori、CatBoost。",
+                  outcome: "随机森林近乎完美预测能耗（<span class='highlight'>相关系数=0.9995</span>，<span class='highlight'>MAE=0.0001</span>）。朴素贝叶斯能效分级准确率<span class='highlight'>91.9%</span>。<strong>业务价值：</strong>支持数据中心主动节能策略，降低运营成本与碳足迹；关联规则揭示了可操作的硬件-负载配置方案。",
+                  contribution: "项目负责人，数据清洗、多模型实现、性能评估、提出可执行建议。",
+                  githubLink: "", youtubeLink: ""
+                }
+            ],
+            internships: [
+                { title: "IT运维助理工程师（实习）", company: "美晟供应链有限公司", date: "03/2024 – 06/2024",
+                  description: "协助工程师进行系统故障排查（远程登录/现场调试），完成日志分析与性能优化。使用Ansible自动化管理公司账号。配置并维护网络设备，监控流量并解决瓶颈问题。",
+                  contribution: "实现自动化脚本，保障网络稳定。" },
+                { title: "教师（实习）", company: "惠州城市学院", date: "09/2023 – 10/2023",
+                  description: "承担5门课程教学（AutoCAD、工程制图、工业机器人应用、Python、电气控制与PLC）。通过视频和实物演示讲解RAPID编程理论。",
+                  contribution: "开发课程材料并指导实操。" }
+            ],
+            resumeDesc: "下载我的简历（中文版或英文版）",
+            resumeNote: " ",
+            contact: { email: "dingyingqi0111@gmail.com", phone: "+86 13590399058 / +852 67003560" },
+            footer: "© 2026 丁颖淇 | 数据与AI求职网站"
+        }
+    };
+
+    // 渲染技能
+    function renderSkills(lang) {
+        const s = content[lang].skills;
+        const container = document.getElementById('skills-content');
+        container.innerHTML = `
+            <div class="skill-cat"><h3>💻 ${lang === 'en' ? 'Programming' : '编程语言'}</h3><ul>${s.programming.map(i => `<li>${i}</li>`).join('')}</ul></div>
+            <div class="skill-cat"><h3>📊 ${lang === 'en' ? 'Data & ML' : '数据与机器学习'}</h3><ul>${s.dataMl.map(i => `<li>${i}</li>`).join('')}</ul></div>
+            <div class="skill-cat"><h3>🔧 ${lang === 'en' ? 'Engineering Design' : '工程设计软件'}</h3><ul>${s.engineering.map(i => `<li>${i}</li>`).join('')}</ul></div>
+            <div class="skill-cat"><h3>⚙️ ${lang === 'en' ? 'DevOps & Tools' : '开发运维工具'}</h3><ul>${s.devops.map(i => `<li>${i}</li>`).join('')}</ul></div>
+        `;
+    }
+
+    // 渲染项目
+    function renderProjects(lang) {
+        const projects = content[lang].projects;
+        const container = document.getElementById('projects-container');
+        container.innerHTML = '';
+        projects.forEach(proj => {
+            const card = document.createElement('div');
+            card.className = 'project-card';
+            const techTagsHtml = proj.techTags.map(t => `<span class="tech-tag">${t}</span>`).join('');
+            let linksHtml = '';
+            if (proj.githubLink && proj.githubLink.trim() !== "") {
+                linksHtml += `<a href="${proj.githubLink}" target="_blank" class="project-link">💻 GitHub</a>`;
+            }
+            if (proj.youtubeLink && proj.youtubeLink.trim() !== "") {
+                linksHtml += `<a href="${proj.youtubeLink}" target="_blank" class="project-link">📺 YouTube</a>`;
+            }
+            const linksSection = linksHtml ? `<div class="project-links">${linksHtml}</div>` : '';
+            card.innerHTML = `
+                <div class="project-title">${proj.title}</div>
+                <div class="project-date">${proj.date}</div>
+                <div class="project-tech-tags">${techTagsHtml}</div>
+                <div class="detail-item"><span class="detail-label">${lang === 'en' ? '❓ Problem:' : '❓ 问题：'}</span><div class="detail-value">${proj.problem}</div></div>
+                <div class="detail-item"><span class="detail-label">${lang === 'en' ? '📊 Data:' : '📊 数据：'}</span><div class="detail-value">${proj.data}</div></div>
+                <div class="detail-item"><span class="detail-label">${lang === 'en' ? '⚙️ Approach:' : '⚙️ 方法：'}</span><div class="detail-value">${proj.approach}</div></div>
+                <div class="detail-item"><span class="detail-label">${lang === 'en' ? '📈 Outcome:' : '📈 结果：'}</span><div class="detail-value">${proj.outcome}</div></div>
+                <div class="detail-item"><span class="detail-label">${lang === 'en' ? '👤 Contribution:' : '👤 个人贡献：'}</span><div class="detail-value">${proj.contribution}</div></div>
+                ${linksSection}
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function renderInternships(lang) {
+        const internships = content[lang].internships;
+        const container = document.getElementById('internship-container');
+        container.innerHTML = '';
+        internships.forEach(intern => {
+            const card = document.createElement('div');
+            card.className = 'intern-card';
+            card.innerHTML = `
+                <div class="intern-title">${intern.title} @ ${intern.company}</div>
+                <div class="intern-date">${intern.date}</div>
+                <div class="detail-item"><span class="detail-label">${lang === 'en' ? '📋 Description:' : '📋 工作内容：'}</span><div class="detail-value">${intern.description}</div></div>
+                <div class="detail-item"><span class="detail-label">${lang === 'en' ? '🤝 My Role:' : '🤝 我的角色：'}</span><div class="detail-value">${intern.contribution}</div></div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function renderStaticText(lang) {
+        const data = content[lang];
+        document.getElementById('home-name').innerText = data.homeName;
+        document.getElementById('headline-text').innerText = data.headline;
+        document.getElementById('tags-area').innerHTML = data.tags.map(t => `<span class="tag">${t}</span>`).join('');
+        document.getElementById('about-p1').innerText = data.aboutP1;
+        document.getElementById('about-preference').innerHTML = data.aboutPreference;
+        const eduHtml = data.edu.replace(/\n/g, '<br>');
+        document.getElementById('edu-block').innerHTML = `<strong>${lang === 'en' ? '🎓 Education' : '🎓 教育背景'}</strong><br>${eduHtml}`;
+        document.getElementById('strength-title').innerHTML = lang === 'en' ? '💡 Core Strengths' : '💡 核心优势';
+        document.getElementById('strengths-list').innerHTML = data.strengths.map(s => `<li>${s}</li>`).join('');
+        document.getElementById('about-highlights').innerHTML = data.highlightsHtml;
+        document.getElementById('resume-desc').innerText = data.resumeDesc;
+        document.getElementById('resume-note').innerHTML = data.resumeNote;
+        
+        // 两个简历按钮的文字（根据语言）
+        const cnBtn = document.getElementById('resume-cn-link');
+        const enBtn = document.getElementById('resume-en-link');
+        if (lang === 'zh') {
+            cnBtn.textContent = '📄 下载中文简历 (PDF)';
+            enBtn.textContent = '📄 下载英文简历 (PDF)';
+        } else {
+            cnBtn.textContent = '📄 Download Chinese Resume (PDF)';
+            enBtn.textContent = '📄 Download English Resume (PDF)';
+        }
+        
+        const contact = data.contact;
+        const contactDiv = document.getElementById('contact-info');
+        contactDiv.innerHTML = `
+            <div class="contact-item">
+                📧 <a href="mailto:${contact.email}">${contact.email}</a>
+                <button class="copy-btn" data-email="${contact.email}" title="Copy email">📋</button>
+            </div>
+            <div class="contact-item">📞 ${contact.phone}</div>
+        `;
+        document.getElementById('footer-text').innerText = data.footer;
+        // 标题
+        document.getElementById('about-title').innerText = lang === 'en' ? 'About Me' : '关于我';
+        document.getElementById('skills-title').innerText = lang === 'en' ? 'Skills' : '技能';
+        document.getElementById('projects-title').innerText = lang === 'en' ? 'Projects' : '项目经历';
+        document.getElementById('internship-title').innerText = lang === 'en' ? 'Internship Experience' : '实习经历';
+        document.getElementById('resume-title').innerText = lang === 'en' ? 'Resume' : '简历';
+        document.getElementById('contact-title').innerText = lang === 'en' ? 'Contact' : '联系方式';
+
+        // 重新绑定复制按钮事件
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const email = btn.getAttribute('data-email');
+                navigator.clipboard.writeText(email).then(() => {
+                    const toast = document.getElementById('toastMsg');
+                    toast.style.opacity = '1';
+                    setTimeout(() => { toast.style.opacity = '0'; }, 1500);
+                });
+            });
+        });
+    }
+
+    let currentLang = 'en';
+    function setLanguage(lang) {
+        currentLang = lang;
+        renderStaticText(lang);
+        renderSkills(lang);
+        renderProjects(lang);
+        renderInternships(lang);
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            if (btn.getAttribute('data-lang') === lang) btn.classList.add('active');
+            else btn.classList.remove('active');
+        });
+    }
+
+    // 深色模式
+    function initTheme() {
+        const stored = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const isDark = stored === 'dark' || (stored === null && prefersDark);
+        if (isDark) document.body.classList.add('dark');
+        const toggle = document.getElementById('themeToggle');
+        toggle.textContent = isDark ? '☀️' : '🌙';
+        toggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+            const nowDark = document.body.classList.contains('dark');
+            localStorage.setItem('theme', nowDark ? 'dark' : 'light');
+            toggle.textContent = nowDark ? '☀️' : '🌙';
+        });
+    }
+
+    // 回到顶部逻辑
+    function initGoTop() {
+        const goTopBtn = document.getElementById('goTopBtn');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                goTopBtn.classList.add('show');
+            } else {
+                goTopBtn.classList.remove('show');
+            }
+        });
+        goTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    // 简历链接（两个独立的 Google Drive 直链）
+    const resumeCnLink = "https://drive.google.com/file/d/1wNWLXm-TVZw2dbTLd9wR3RGxTuY5p9rC/view?usp=sharing";   // 为中文简历的 Google Drive 直接下载链接
+    const resumeEnLink = "https://drive.google.com/file/d/1Y3segH8sgOKAfKmbvOvYC3PViol6NxB5/view?usp=sharing";   // 英文简历的 Google Drive 直接下载链接
+    document.getElementById('resume-cn-link').href = resumeCnLink;
+    document.getElementById('resume-en-link').href = resumeEnLink;
+
+    // 绑定语言切换
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => setLanguage(btn.getAttribute('data-lang')));
+    });
+
+    setLanguage('en');
+    initTheme();
+    initGoTop();
+</script>
+</body>
+</html>
