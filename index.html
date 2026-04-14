@@ -563,7 +563,7 @@
     const content = {
         en: {
             homeName: "Ding Yingqi",
-            personalInfo: "Female | 24 years old",,
+            personalInfo: "Female | 24 years old",
             headline: "Seeking Data Analytics / AI-related Internship – 2026 Graduate",
             tags: ["Data Analytics", "Artificial Intelligence", "Machine Learning", "Python", "SQL", "Data Mining", "Robotics"],
             aboutP1: "I am a Master of Data Science student at Lingnan University (expected to graduate in November 2026) with a Bachelor's in Robotics Engineering from Guangdong Polytechnic Normal University. This interdisciplinary background — engineering and data science — gives me unique strengths: engineering training equipped me with systems thinking, troubleshooting, and closed-loop control; data science provides me with core skills in modeling, analysis, data mining, and business insight. I excel at bridging the physical and data worlds — whether building predictive models for business decisions, designing reinforcement learning agents for dynamic environments, or optimizing database performance. My engineering background taught me how to debug complex systems under constraints and deliver robust solutions. Now I apply the same rigor to data work: from data cleaning to deploying machine learning models that create real impact.",
@@ -819,6 +819,7 @@
     function renderStaticText(lang) {
         const data = content[lang];
         document.getElementById('home-name').innerText = data.homeName;
+        document.getElementById('personal-info').innerText = data.personalInfo;
         document.getElementById('headline-text').innerText = data.headline;
         document.getElementById('tags-area').innerHTML = data.tags.map(t => `<span class="tag">${t}</span>`).join('');
         document.getElementById('about-p1').innerText = data.aboutP1;
